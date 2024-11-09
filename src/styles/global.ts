@@ -32,7 +32,8 @@ export const GlobalStyle = createGlobalStyle`
     --fs-text-s: 0.875rem;
     --fs-text-xs: 0.75rem;
     
-    --ff-sans-roboto: 'Roboto', sans-serif;  
+    --ff-sans-roboto: 'Roboto', sans-serif;
+    --ff-sans-baloo: 'Baloo+2', sans-serif;
     --fw-extrabold: 'bolder';
     --fw-bold: 'bold';
   }
