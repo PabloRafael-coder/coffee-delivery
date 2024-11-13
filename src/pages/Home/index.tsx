@@ -1,5 +1,13 @@
 import { PurchaseBenefits } from '../../components/PurchaseBenefits';
-import { HomeContainer, HomeContent, HomeContextText } from './styles';
+import { ShoppingCart, Package, Timer, Coffee } from '@phosphor-icons/react';
+import glassImage from '../../assets/Imagem.svg';
+
+import {
+  ContainerPurchaseBenefits,
+  HomeContainer,
+  HomeContent,
+  HomeContextText,
+} from './styles';
 
 export function Home() {
   return (
@@ -13,8 +21,30 @@ export function Home() {
               qualquer hora
             </p>
           </HomeContextText>
-          <PurchaseBenefits />
+          <ContainerPurchaseBenefits>
+            <PurchaseBenefits
+              Icon={ShoppingCart}
+              text="Compra simples e segura"
+              variant="yellowDark"
+            />
+            <PurchaseBenefits
+              Icon={Package}
+              text="Embalagem mantém o café intacto"
+              variant="base"
+            />
+            <PurchaseBenefits
+              Icon={Timer}
+              text="Entrega rápida e rastreada"
+              variant="yellow"
+            />
+            <PurchaseBenefits
+              Icon={Coffee}
+              text="O café chega fresquinho até você"
+              variant="purple"
+            />
+          </ContainerPurchaseBenefits>
         </HomeContent>
+        <img src={glassImage} alt="" />
       </section>
     </HomeContainer>
   );

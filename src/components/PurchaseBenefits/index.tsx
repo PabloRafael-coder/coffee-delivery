@@ -1,13 +1,19 @@
-import { ShoppingCart } from '@phosphor-icons/react';
-import { HomePurchaseBenefits } from './styles';
+import type { Icon } from '@phosphor-icons/react';
+import { HomePurchaseBenefits, type ColorVariant } from './styles';
 
-export function PurchaseBenefits() {
+interface ColorPurchaseProps {
+  text: string;
+  variant: ColorVariant;
+  Icon: Icon;
+}
+
+export function PurchaseBenefits({ text, Icon, variant }: ColorPurchaseProps) {
   return (
-    <HomePurchaseBenefits>
+    <HomePurchaseBenefits variant={variant}>
       <div>
-        <ShoppingCart weight="fill" />
+        <Icon weight="fill" />
       </div>
-      <p>Compra simples e segura</p>
+      <p>{text}</p>
     </HomePurchaseBenefits>
   );
 }
