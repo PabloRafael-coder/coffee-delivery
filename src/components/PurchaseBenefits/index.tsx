@@ -1,13 +1,17 @@
-import type { Icon } from '@phosphor-icons/react';
+import type { IconProps } from '@phosphor-icons/react';
 import { HomePurchaseBenefits, type ColorVariant } from './styles';
 
-interface ColorPurchaseProps {
+interface PurchaseBenefitsProps {
   text: string;
   variant: ColorVariant;
-  Icon: Icon;
+  Icon: React.ComponentType<IconProps>;
 }
 
-export function PurchaseBenefits({ text, Icon, variant }: ColorPurchaseProps) {
+export function PurchaseBenefits({
+  text,
+  Icon,
+  variant,
+}: PurchaseBenefitsProps) {
   return (
     <HomePurchaseBenefits variant={variant}>
       <div>

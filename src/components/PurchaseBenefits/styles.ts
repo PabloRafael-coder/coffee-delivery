@@ -11,7 +11,7 @@ const setVariant = {
   yellow: '--yellow',
   base: '--base-text',
   purple: '--purple',
-};
+} as const;
 
 export const HomePurchaseBenefits = styled.div<PropsColor>`
   display: flex;
