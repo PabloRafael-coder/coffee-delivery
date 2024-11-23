@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
-export const HomeContainer = styled.main`
-  section {
-    width: min(90rem, 100% - 2 * 10rem);
-    display: flex;
-    gap: 4rem;
-    margin-inline: auto;
-    border: solid 1px black;
-    padding-block: 5.75rem;
-  }
+export const HomeSection = styled.section`
+  width: min(90rem, 100% - 2 * 10rem);
+  display: flex;
+  gap: 4rem;
+  margin-inline: auto;
+  border: solid 1px black;
+  padding-block: 5.75rem;
 `;
 
 export const HomeContent = styled.div`
@@ -41,4 +39,25 @@ export const ContainerPurchaseBenefits = styled.div`
   gap: 1.25rem 2.5rem;
   max-width: 35.44rem;
   margin-top: 4rem;
+`;
+
+export const CoffeeMenuContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: min(90rem, 100% - 2 * 10rem);
+  gap: 4rem;
+  margin-inline: auto;
+  border: solid 1px black;
+  padding-block: 1.5rem;
+
+  h2 {
+    font-family: var(--ff-sans-baloo);
+    font-size: var(--fs-title-l);
+  }
+`;
+
+export const CoffeeMenuGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem 2.5rem;
 `;

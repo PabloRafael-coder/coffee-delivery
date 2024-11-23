@@ -7,15 +7,18 @@ import {
 } from '@phosphor-icons/react';
 
 import {
+  CoffeeMenuContainer,
+  CoffeeMenuGrid,
   ContainerPurchaseBenefits,
-  HomeContainer,
   HomeContent,
   HomeContextText,
+  HomeSection,
 } from './styles';
 
 import type { ColorVariant } from '../../components/PurchaseBenefits/styles';
 import { PurchaseBenefits } from '../../components/PurchaseBenefits';
 import glassImage from '../../assets/Imagem.svg';
+import { Catalog } from '../../components/Catalog';
 
 interface BenefitsType {
   id: number;
@@ -53,8 +56,8 @@ const purchaseBenefitsData: Array<BenefitsType> = [
 
 export function Home() {
   return (
-    <HomeContainer>
-      <section>
+    <main>
+      <HomeSection>
         <HomeContent>
           <HomeContextText>
             <h1>Encontre o café perfeito para qualquer hora do dia</h1>
@@ -77,7 +80,13 @@ export function Home() {
           </ContainerPurchaseBenefits>
         </HomeContent>
         <img src={glassImage} alt="" />
-      </section>
-    </HomeContainer>
+      </HomeSection>
+      <CoffeeMenuContainer>
+        <h2>Nossos Cafés</h2>
+        <CoffeeMenuGrid>
+          <Catalog />
+        </CoffeeMenuGrid>
+      </CoffeeMenuContainer>
+    </main>
   );
 }
