@@ -8,7 +8,7 @@ import {
 import Tradicional from '../../assets/Type=Expresso.svg';
 import { Minus, Plus, ShoppingCartSimple } from '@phosphor-icons/react';
 
-export function CoffeeMenu() {
+export function Catalog() {
   return (
     <ContainerCoffeeMenu>
       <img src={Tradicional} alt="" />
