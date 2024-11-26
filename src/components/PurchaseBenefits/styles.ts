@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export type ColorVariant = 'yellowDark' | 'yellow' | 'base' | 'purple';
 
@@ -23,14 +23,7 @@ export const HomePurchaseBenefits = styled.div<PropsColor>`
     border-radius: 50%;
     width: 32px;
     height: 32px;
-    ${(props) => {
-      return css`
-        background-color: var(${setVariant[props.variant]});
-      `;
-    }}
-
-    svg {
-      color: var(--white);
-    }
+    background-color: ${(props) => props.theme[setVariant[props.variant]]};
+    color: ${(props) => props.theme['--white']};
   }
 `;

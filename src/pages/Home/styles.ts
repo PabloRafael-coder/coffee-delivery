@@ -22,14 +22,14 @@ export const HomeContextText = styled.div`
     font-family: 'Baloo 2', sans-serif;
     font-size: var(--fs-title-xl);
     line-height: 130%;
-    color: var(--base-title);
+    color: ${(props) => props.theme['--base-title']};
   }
 
   p {
     font-family: 'Roboto', sans-serif;
     font-size: var(--fs-text-l);
     line-height: 130%;
-    color: var(--base-subtitle);
+    color: ${(props) => props.theme['--base-subtitle']};
   }
 `;
 

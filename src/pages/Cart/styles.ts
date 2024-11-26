@@ -22,7 +22,7 @@ const StyleBaseSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: var(--base-card);
+  background: ${(props) => props.theme['--base-card']};
   padding: 2.5rem;
   border-radius: 0.375rem;
 `;
@@ -35,7 +35,7 @@ export const FormContainer = styled(StyleBaseSection)`
     gap: 0.5rem;
 
     & svg {
-      color: var(--yellow-dark);
+      color: ${(props) => props.theme['--yellow-dark']};
       width: 22px;
       height: 22px;
     }
@@ -54,12 +54,12 @@ const StylesBaseDetails = styled.div`
 
   :nth-child(1) {
     font-size: var(--fs-text-m);
-    color: var(--base-subtitle);
+    color: ${(props) => props.theme['--base-subtitle']};
   }
 
   :nth-child(2) {
     font-size: var(--fs-text-s);
-    color: var(--base-text);
+    color: ${(props) => props.theme['--base-text']};
   }
 `;
 
@@ -71,7 +71,7 @@ export const PayMethodContainer = styled(StyleBaseSection)`
     gap: 0.5rem;
   }
   & svg {
-    color: var(--purple);
+    color: ${(props) => props.theme['--purple']};
     width: 22px;
     height: 22px;
   }

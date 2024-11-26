@@ -20,11 +20,11 @@ export const HeaderLocalization = styled.div`
   gap: 0.25rem;
   padding: 0.5rem;
   border-radius: 0.375rem;
-  background: var(--purple-light);
+  background: ${(props) => props.theme['--purple-light']};
   font-size: var(--fs-text-s);
 
   p {
-    color: var(--purple-dark);
+    color: ${(props) => props.theme['--purple-dark']};
   }
 `;
 
@@ -36,6 +36,6 @@ export const HeaderLinkCart = styled(NavLink)`
   padding: 0.5rem;
   border-radius: 0.375rem;
   gap: 0.25rem;
-  background: var(--yellow-light);
-  color: var(--yellow-dark);
+  background: ${(props) => props.theme['--yellow-light']};
+  color: ${(props) => props.theme['--yellow-dark']};
 `;

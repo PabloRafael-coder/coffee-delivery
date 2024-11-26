@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const InputBase = styled.input`
-  background: var(--base-input);
-  color: var(--base-label);
+  background: ${(props) => props.theme['--base-input']};
+  color: ${(props) => props.theme['--base-label']};
   height: 3rem;
   padding: 0.75rem;
-  border: 1px solid var(--base-button);
+  border: 1px solid ${(props) => props.theme['--base-button']};
   border-radius: 0.25rem;
   font-size: var(--fs-text-s);
   outline: none;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerCoffeeMenu = styled.div`
   position: relative;
-  background: var(--base-card);
+  background: ${(props) => props.theme['--base-card']};
   max-width: 16rem;
   padding-inline: 1.25rem;
   padding-bottom: 1.25rem;
@@ -28,8 +28,8 @@ export const ContainerContentCoffeeMenu = styled.div`
   header {
     text-transform: uppercase;
     font-weight: bold;
-    background: var(--yellow-light);
-    color: var(--yellow-dark);
+    background: ${(props) => props.theme['--yellow-light']};
+    color: ${(props) => props.theme['--yellow-dark']};
     padding: 0.25rem 0.5rem;
     border-radius: 10rem;
     font-size: 10px;
@@ -38,12 +38,12 @@ export const ContainerContentCoffeeMenu = styled.div`
   & h2 {
     font-size: var(--fs-title-s);
     font-family: var(--ff-sans-baloo);
-    color: var(--base-subtitle);
+    color: ${(props) => props.theme['--base-subtitle']};
   }
 
   > p {
     font-size: var(--fs-text-s);
-    color: var(--base-label);
+    color: ${(props) => props.theme['--base-label']};
   }
 `;
 
@@ -58,14 +58,14 @@ export const ContainerPriceCoffeeMenu = styled.div`
 
   > p {
     font-size: var(--fs-text-s);
-    color: var(--base-text);
+    color: ${(props) => props.theme['--base-text']};
     margin-right: 1.5rem;
 
     & span {
       font-family: var(--ff-sans-baloo);
       font-size: var(--fs-title-m);
       font-weight: 700;
-      color: var(--base-text);
+      color: ${(props) => props.theme['--base-text']};
     }
   }
 `;
@@ -75,7 +75,7 @@ export const CoffeeQuantityContainer = styled.div`
   align-items: center;
   gap: 4px;
   padding: 0.5rem;
-  background: var(--base-button);
+  background: ${(props) => props.theme['--base-button']};
   border-radius: 6px;
 
   button {
@@ -85,22 +85,22 @@ export const CoffeeQuantityContainer = styled.div`
   }
 
   svg {
-    color: var(--purple);
+    color: ${(props) => props.theme['--purple']};
   }
 `;
 
 export const CartNavigationButton = styled.button`
   border: none;
-  background: var(--purple-dark);
+  background: ${(props) => props.theme['--purple-dark']};
   padding: 0.5rem;
   border-radius: 0.375rem;
   cursor: pointer;
 
   &:hover {
-    background: var(--purple);
+    background: ${(props) => props.theme['--purple']};
   }
 
   svg {
-    color: var(--white);
+    color: ${(props) => props.theme['--white']};
   }
 `;
