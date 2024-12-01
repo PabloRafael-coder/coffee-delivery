@@ -70,25 +70,6 @@ export const ContainerPriceCoffeeMenu = styled.div`
   }
 `;
 
-export const CoffeeQuantityContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0.5rem;
-  background: ${(props) => props.theme['--base-button']};
-  border-radius: 6px;
-
-  button {
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
-
-  svg {
-    color: ${(props) => props.theme['--purple']};
-  }
-`;
-
 export const CartNavigationButton = styled.button`
   border: none;
   background: ${(props) => props.theme['--purple-dark']};

@@ -1,12 +1,12 @@
 import {
   CartNavigationButton,
-  CoffeeQuantityContainer,
   ContainerCoffeeMenu,
   ContainerContentCoffeeMenu,
   ContainerPriceCoffeeMenu,
 } from './styles';
 import Tradicional from '../../assets/Type=Expresso.svg';
-import { Minus, Plus, ShoppingCartSimple } from '@phosphor-icons/react';
+import { ShoppingCartSimple } from '@phosphor-icons/react';
+import { CoffeQuantity } from '../CoffeeQuantity';
 
 export function Catalog() {
   return (
@@ -21,15 +21,7 @@ export function Catalog() {
             R$ <span>9,90</span>
           </p>
           <div>
-            <CoffeeQuantityContainer>
-              <button>
-                <Minus size={14} weight="bold" />
-              </button>
-              <p>1</p>
-              <button>
-                <Plus size={14} weight="bold" />
-              </button>
-            </CoffeeQuantityContainer>
+            <CoffeQuantity />
             <CartNavigationButton>
               <ShoppingCartSimple size={22} weight="fill" />
             </CartNavigationButton>
