@@ -1,17 +1,25 @@
 import { CurrencyDollar, MapPinLine } from '@phosphor-icons/react';
 import {
   AddressDetails,
+  AsideContainer,
+  ButtonOrderConfirm,
   CartContainer,
+  CartContent,
   FormContainer,
+  OrderSummary,
   PayDetails,
+  PayDetailsContainer,
   PayMethodContainer,
+  Separator,
 } from './styles';
-import { InputText } from './InputText';
+import { InputText } from './components/InputText';
+import { SelectPayment } from './components/SelectPaymeny';
+import { ItemAddToCart } from './components/ItemAddToCart';
 
 export function Cart() {
   return (
     <CartContainer>
-      <section>
+      <CartContent>
         <h2>Complete seu pedido</h2>
         <FormContainer>
           <div>
@@ -26,7 +34,7 @@ export function Cart() {
           </form>
         </FormContainer>
         <PayMethodContainer>
-          <div>
+          <PayDetailsContainer>
             <CurrencyDollar />
             <PayDetails>
               <p>Pagamento</p>
@@ -34,9 +42,34 @@ export function Cart() {
                 O pagamento é feito na entrega. Escolha a forma que deseja pagar
               </p>
             </PayDetails>
-          </div>
+          </PayDetailsContainer>
+          <SelectPayment />
         </PayMethodContainer>
-      </section>
+      </CartContent>
+      <AsideContainer>
+        <h2>Cafés selecionados</h2>
+        <section>
+          <ItemAddToCart />
+          <Separator></Separator>
+          <ItemAddToCart />
+          <Separator></Separator>
+          <OrderSummary>
+            <div>
+              <p>Total de Itens</p>
+              <p>R$ 29,70</p>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <p>R$ 3,50</p>
+            </div>
+            <div>
+              <p>Total</p>
+              <p>RS 33,20</p>
+            </div>
+          </OrderSummary>
+          <ButtonOrderConfirm>Confirmar pedido</ButtonOrderConfirm>
+        </section>
+      </AsideContainer>
     </CartContainer>
   );
 }
