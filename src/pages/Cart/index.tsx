@@ -67,7 +67,9 @@ export function Cart() {
               <p>RS 33,20</p>
             </div>
           </OrderSummary>
-          <ButtonOrderConfirm>Confirmar pedido</ButtonOrderConfirm>
+          <ButtonOrderConfirm>
+            <a href="/pedidos">Confirmar pedido</a>
+          </ButtonOrderConfirm>
         </section>
       </AsideContainer>
     </CartContainer>
