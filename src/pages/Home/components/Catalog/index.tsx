@@ -4,21 +4,25 @@ import {
   ContainerContentCoffeeMenu,
   ContainerPriceCoffeeMenu,
 } from './styles';
-import Tradicional from '../../assets/Type=Expresso.svg';
 import { ShoppingCartSimple } from '@phosphor-icons/react';
-import { CoffeQuantity } from '../CoffeeQuantity';
+import { CoffeQuantity } from '../../../../components/CoffeeQuantity';
+import type { CoffeeOptions } from '../..';
 
-export function Catalog() {
+interface CoffeeProps {
+  coffee: CoffeeOptions;
+}
+
+export function Catalog({ coffee }: CoffeeProps) {
   return (
     <ContainerCoffeeMenu>
-      <img src={Tradicional} alt="" />
+      <img src={coffee.image} alt="" />
       <ContainerContentCoffeeMenu>
-        <header>Tradicionar</header>
-        <h2>Expresso Tradicional</h2>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <header>{coffee.type}</header>
+        <h2>{coffee.title}</h2>
+        <p>{coffee.text}</p>
         <ContainerPriceCoffeeMenu>
           <p>
-            R$ <span>9,90</span>
+            R$ <span>{coffee.price}</span>
           </p>
           <div>
             <CoffeQuantity />
