@@ -15,8 +15,11 @@ import {
 import { InputText } from './components/InputText';
 import { SelectPayment } from './components/SelectPaymeny';
 import { ItemAddToCart } from './components/ItemAddToCart';
+import { useContext } from 'react';
+import { CoffeeContext } from '../../contexts/CoffeeContext';
 
 export function Cart() {
+  const { coffees } = useContext(CoffeeContext);
   return (
     <CartContainer>
       <CartContent>
@@ -49,9 +52,15 @@ export function Cart() {
       <AsideContainer>
         <h2>Cafés selecionados</h2>
         <section>
-          <ItemAddToCart />
-          <Separator></Separator>
-          <ItemAddToCart />
+          {coffees.map((coffee) => {
+            return (
+              <>
+                <ItemAddToCart coffee={coffee} />
+                <Separator></Separator>
+              </>
+            );
+          })}
+
           <Separator></Separator>
           <OrderSummary>
             <div>

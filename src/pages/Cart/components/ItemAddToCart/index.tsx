@@ -1,6 +1,5 @@
 import { Trash } from '@phosphor-icons/react';
 import { CoffeQuantity } from '../../../../components/CoffeeQuantity';
-import expresso from '../../../../assets/Type=Expresso.svg';
 import {
   AddOrRemoveItemsCart,
   CoffeeDetails,
@@ -9,15 +8,20 @@ import {
   ItemDetails,
   RemoveItemButton,
 } from './styles';
+import type { Coffee } from '../../../../contexts/CoffeeContext';
 
-export function ItemAddToCart() {
+interface ItemCartProps {
+  coffee: Coffee;
+}
+
+export function ItemAddToCart({ coffee }: ItemCartProps) {
   return (
     <ItemContainer>
       <ItemContent>
         <ItemDetails>
-          <img src={expresso} alt="" />
+          <img src={coffee.image} alt="" />
           <CoffeeDetails>
-            <p>Expresso Tradicional</p>
+            <p>{coffee.title}</p>
             <AddOrRemoveItemsCart>
               <CoffeQuantity />
               <RemoveItemButton>
@@ -28,7 +32,7 @@ export function ItemAddToCart() {
           </CoffeeDetails>
         </ItemDetails>
       </ItemContent>
-      <p>R$ 9,90</p>
+      <p>R$ {coffee.price}</p>
     </ItemContainer>
   );
 }

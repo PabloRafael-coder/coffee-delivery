@@ -7,12 +7,20 @@ import {
 import { ShoppingCartSimple } from '@phosphor-icons/react';
 import { CoffeQuantity } from '../../../../components/CoffeeQuantity';
 import type { CoffeeOptions } from '../..';
+import { useContext } from 'react';
+import { CoffeeContext } from '../../../../contexts/CoffeeContext';
 
 interface CoffeeProps {
   coffee: CoffeeOptions;
 }
 
 export function Catalog({ coffee }: CoffeeProps) {
+  const { createNewCoffeeOrder } = useContext(CoffeeContext);
+
+  function handleCreateNewCoffee() {
+    createNewCoffeeOrder(coffee);
+  }
+
   return (
     <ContainerCoffeeMenu>
       <img src={coffee.image} alt="" />
@@ -26,7 +34,7 @@ export function Catalog({ coffee }: CoffeeProps) {
           </p>
           <div>
             <CoffeQuantity />
-            <CartNavigationButton>
+            <CartNavigationButton onClick={handleCreateNewCoffee}>
               <ShoppingCartSimple size={22} weight="fill" />
             </CartNavigationButton>
           </div>
