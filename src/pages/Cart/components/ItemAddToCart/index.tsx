@@ -12,9 +12,14 @@ import type { Coffee } from '../../../../contexts/CoffeeContext';
 
 interface ItemCartProps {
   coffee: Coffee;
+  removeCoffeeOrder: (removeCoffee: number) => void;
 }
 
-export function ItemAddToCart({ coffee }: ItemCartProps) {
+export function ItemAddToCart({ coffee, removeCoffeeOrder }: ItemCartProps) {
+  function handleRemoveCoffeeOrder() {
+    removeCoffeeOrder(coffee.id);
+  }
+
   return (
     <ItemContainer>
       <ItemContent>
@@ -24,7 +29,7 @@ export function ItemAddToCart({ coffee }: ItemCartProps) {
             <p>{coffee.title}</p>
             <AddOrRemoveItemsCart>
               <CoffeQuantity />
-              <RemoveItemButton>
+              <RemoveItemButton onClick={handleRemoveCoffeeOrder}>
                 <Trash />
                 Remover
               </RemoveItemButton>

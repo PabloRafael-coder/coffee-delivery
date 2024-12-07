@@ -12,6 +12,7 @@ export interface Coffee {
 interface CoffeeContextType {
   coffees: Coffee[];
   createNewCoffeeOrder: (newCoffeeOrder: Coffee) => void;
+  removeCoffeeOrder: (removeCoffee: number) => void;
 }
 
 export const CoffeeContext = createContext({} as CoffeeContextType);
@@ -29,8 +30,18 @@ export function CoffeeContextProvider({
     setCoffees((prevCoffee) => [...prevCoffee, newCoffeeOrder]);
   }
 
+  function removeCoffeeOrder(removeCoffee: number) {
+    const removeCoffeeCart = coffees.filter((coffee) => {
+      return coffee.id !== removeCoffee;
+    });
+
+    setCoffees(removeCoffeeCart);
+  }
+
   return (
-    <CoffeeContext.Provider value={{ coffees, createNewCoffeeOrder }}>
+    <CoffeeContext.Provider
+      value={{ coffees, createNewCoffeeOrder, removeCoffeeOrder }}
+    >
       {children}
     </CoffeeContext.Provider>
   );

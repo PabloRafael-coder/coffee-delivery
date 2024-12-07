@@ -19,7 +19,7 @@ import { useContext } from 'react';
 import { CoffeeContext } from '../../contexts/CoffeeContext';
 
 export function Cart() {
-  const { coffees } = useContext(CoffeeContext);
+  const { coffees, removeCoffeeOrder } = useContext(CoffeeContext);
   return (
     <CartContainer>
       <CartContent>
@@ -55,7 +55,10 @@ export function Cart() {
           {coffees.map((coffee) => {
             return (
               <>
-                <ItemAddToCart coffee={coffee} />
+                <ItemAddToCart
+                  coffee={coffee}
+                  removeCoffeeOrder={removeCoffeeOrder}
+                />
                 <Separator></Separator>
               </>
             );
