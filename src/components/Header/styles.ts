@@ -38,4 +38,21 @@ export const HeaderLinkCart = styled(NavLink)`
   gap: 0.25rem;
   background: ${(props) => props.theme['--yellow-light']};
   color: ${(props) => props.theme['--yellow-dark']};
+  position: relative;
+`;
+
+export const CoffeeQuantity = styled.span`
+  display: flex;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #c47f17;
+  color: #ffffff;
+  position: absolute;
+  right: -8px;
+  top: -7px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 `;

@@ -11,6 +11,7 @@ export interface Coffee {
 
 interface CoffeeContextType {
   coffees: Coffee[];
+  coffeeQuantity: number;
   createNewCoffeeOrder: (newCoffeeOrder: Coffee) => void;
   removeCoffeeOrder: (removeCoffee: number) => void;
 }
@@ -26,6 +27,8 @@ export function CoffeeContextProvider({
 }: CoffeeContextProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
 
+  const coffeeQuantity = coffees.length;
+
   function createNewCoffeeOrder(newCoffeeOrder: Coffee) {
     setCoffees((prevCoffee) => [...prevCoffee, newCoffeeOrder]);
   }
@@ -40,7 +43,12 @@ export function CoffeeContextProvider({
 
   return (
     <CoffeeContext.Provider
-      value={{ coffees, createNewCoffeeOrder, removeCoffeeOrder }}
+      value={{
+        coffees,
+        createNewCoffeeOrder,
+        removeCoffeeOrder,
+        coffeeQuantity,
+      }}
     >
       {children}
     </CoffeeContext.Provider>

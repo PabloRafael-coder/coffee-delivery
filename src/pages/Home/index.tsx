@@ -129,7 +129,7 @@ const coffeeOptions: CoffeeOptions[] = [
     image: 'src/assets/Type=Macchiato.svg',
   },
   {
-    id: 8,
+    id: 9,
     type: 'tradicional',
     title: 'Mocaccino',
     text: 'Café expresso com calda de chocolate, pouco leite e espuma',
@@ -137,7 +137,7 @@ const coffeeOptions: CoffeeOptions[] = [
     image: 'src/assets/Type=Mochaccino.svg',
   },
   {
-    id: 9,
+    id: 10,
     type: 'tradicional',
     title: 'Chocolate Quente',
     text: 'Bebida feita com chocolate dissolvido no leite quente e café',
@@ -145,7 +145,7 @@ const coffeeOptions: CoffeeOptions[] = [
     image: 'src/assets/Type=Chocolate Quente.svg',
   },
   {
-    id: 10,
+    id: 11,
     type: 'tradicional',
     title: 'Cubano',
     text: 'Drink gelado de café expresso com rum, creme de leite e hortelã',
