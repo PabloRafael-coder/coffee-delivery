@@ -33,7 +33,7 @@ export function Catalog({ coffee }: CoffeeProps) {
             R$ <span>{coffee.price}</span>
           </p>
           <div>
-            <CoffeQuantity />
+            <CoffeQuantity key={coffee.id} coffees={coffee} />
             <CartNavigationButton onClick={handleCreateNewCoffee}>
               <ShoppingCartSimple size={22} weight="fill" />
             </CartNavigationButton>

@@ -7,14 +7,16 @@ export interface Coffee {
   text: string;
   price: string;
   image: string;
+  quantity: number;
 }
 
 interface CoffeeContextType {
   coffees: Coffee[];
   coffeeQuantity: number;
+  coffeeQuantityAdditional?: number;
   createNewCoffeeOrder: (newCoffeeOrder: Coffee) => void;
   removeCoffeeOrder: (removeCoffee: number) => void;
-  handleIncreseCoffeeOrder: (coffeeId: number) => void;
+  IncreseCoffeeOrder: (coffeeId: number, coffeeQuantity: number) => void;
 }
 
 export const CoffeeContext = createContext({} as CoffeeContextType);
@@ -27,13 +29,27 @@ export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
+
   const coffeeQuantity = coffees.length;
 
   function createNewCoffeeOrder(newCoffeeOrder: Coffee) {
-    setCoffees((prevCoffee) => [...prevCoffee, newCoffeeOrder]);
+    setCoffees((prevCoffee) => [
+      ...prevCoffee,
+      { ...newCoffeeOrder, quantity: quantityCoffee },
+    ]);
   }
 
-  function handleIncreseCoffeeOrder() {}
+  function IncreseCoffeeOrder(idCoffee: number) {
+    setCoffees((coffees) =>
+      coffees.map((coffee) => {
+        if (coffee.id === idCoffee) {
+          return { ...coffee, quantity: coffee.quantity + 1 };
+        } else {
+          return coffee;
+        }
+      }),
+    );
+  }
 
   function removeCoffeeOrder(removeCoffee: number) {
     const removeCoffeeCart = coffees.filter((coffee) => {
@@ -49,7 +65,7 @@ export function CoffeeContextProvider({
         coffees,
         createNewCoffeeOrder,
         removeCoffeeOrder,
-        handleIncreseCoffeeOrder,
+        IncreseCoffeeOrder,
         coffeeQuantity,
       }}
     >

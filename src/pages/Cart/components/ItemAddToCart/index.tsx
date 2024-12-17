@@ -28,7 +28,7 @@ export function ItemAddToCart({ coffee, removeCoffeeOrder }: ItemCartProps) {
           <CoffeeDetails>
             <p>{coffee.title}</p>
             <AddOrRemoveItemsCart>
-              <CoffeQuantity />
+              <CoffeQuantity key={coffee.id} coffees={coffee} />
               <RemoveItemButton onClick={handleRemoveCoffeeOrder}>
                 <Trash />
                 Remover
@@ -37,7 +37,7 @@ export function ItemAddToCart({ coffee, removeCoffeeOrder }: ItemCartProps) {
           </CoffeeDetails>
         </ItemDetails>
       </ItemContent>
-      <p>R$ {coffee.price}</p>
+      <p>R${coffee.price}</p>
     </ItemContainer>
   );
 }

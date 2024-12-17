@@ -61,6 +61,7 @@ export interface CoffeeOptions {
   text: string;
   price: string;
   image: string;
+  quantity: number;
 }
 
 const coffeeOptions: CoffeeOptions[] = [
@@ -71,6 +72,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'O tradicional café feito com água quente e grãos moídos',
     price: '9,90',
     image: 'src/assets/Type=Expresso.svg',
+    quantity: 1,
   },
   {
     id: 2,
@@ -79,6 +81,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Expresso diluído, menos intenso que o tradicional',
     price: '9,90',
     image: 'src/assets/Type=Americano.svg',
+    quantity: 1,
   },
   {
     id: 3,
@@ -87,6 +90,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Café expresso tradicional com espuma cremosa',
     price: '9,90',
     image: 'src/assets/Type=Expresso Cremoso.svg',
+    quantity: 1,
   },
   {
     id: 4,
@@ -95,6 +99,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida preparada com café expresso e cubos de gelo',
     price: '9,90',
     image: 'src/assets/Type=Café Gelado.svg',
+    quantity: 1,
   },
   {
     id: 5,
@@ -103,6 +108,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Meio a meio de expresso tradicional com leite vaporizado',
     price: '9,90',
     image: 'src/assets/Type=Café com Leite.svg',
+    quantity: 1,
   },
   {
     id: 6,
@@ -111,6 +117,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     price: '9,90',
     image: 'src/assets/Type=Latte.svg',
+    quantity: 1,
   },
   {
     id: 7,
@@ -119,6 +126,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida com canela feita de doses iguais de café, leite e espuma',
     price: '9,90',
     image: 'src/assets/Type=Capuccino.svg',
+    quantity: 1,
   },
   {
     id: 8,
@@ -127,6 +135,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Café expresso misturado com um pouco de leite quente e espuma',
     price: '9,90',
     image: 'src/assets/Type=Macchiato.svg',
+    quantity: 1,
   },
   {
     id: 9,
@@ -135,6 +144,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: '9,90',
     image: 'src/assets/Type=Mochaccino.svg',
+    quantity: 1,
   },
   {
     id: 10,
@@ -143,6 +153,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: '9,90',
     image: 'src/assets/Type=Chocolate Quente.svg',
+    quantity: 1,
   },
   {
     id: 11,
@@ -151,6 +162,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Drink gelado de café expresso com rum, creme de leite e hortelã',
     price: '9,90',
     image: 'src/assets/Type=Cubano.svg',
+    quantity: 1,
   },
   {
     id: 12,
@@ -159,6 +171,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida adocicada preparada com café e leite de coco',
     price: '9,90',
     image: 'src/assets/Type=Havaiano.svg',
+    quantity: 1,
   },
   {
     id: 13,
@@ -167,6 +180,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida preparada com grãos de café árabe e especiarias',
     price: '9,90',
     image: 'src/assets/Type=Árabe.svg',
+    quantity: 1,
   },
   {
     id: 14,
@@ -175,6 +189,7 @@ const coffeeOptions: CoffeeOptions[] = [
     text: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     price: '9,90',
     image: 'src/assets/Type=Irlandês.svg',
+    quantity: 1,
   },
 ];
 

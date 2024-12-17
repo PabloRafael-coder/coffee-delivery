@@ -1,11 +1,20 @@
 import { Minus, Plus } from '@phosphor-icons/react';
 import { CoffeeQuantityContainer } from './styles';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CoffeeContext } from '../../contexts/CoffeeContext';
+import type { CoffeeOptions } from '../../pages/Home';
 
-export function CoffeQuantity() {
-  const [count, setcount] = useState(0);
-  function increaseQuantityCoffee() {
-    setcount((prevCount) => prevCount + 1);
+interface CartalogProps {
+  coffees: CoffeeOptions;
+}
+
+export function CoffeQuantity({ coffees }: CartalogProps) {
+  const { IncreseCoffeeOrder } = useContext(CoffeeContext);
+  const [coffeeQuantity, setCoffeeQuantity] = useState<number>(0);
+
+  function handleIncreaseQuantityCoffee() {
+    setCoffeeQuantity((prevCoffeeQuantity) => prevCoffeeQuantity + 1);
+    IncreseCoffeeOrder(coffees.id, coffeeQuantity);
   }
 
   return (
@@ -13,9 +22,9 @@ export function CoffeQuantity() {
       <button>
         <Minus size={14} weight="bold" />
       </button>
-      <p>{count}</p>
+      <p>{coffeeQuantity}</p>
       <button>
-        <Plus size={14} weight="bold" onClick={increaseQuantityCoffee} />
+        <Plus size={14} weight="bold" onClick={handleIncreaseQuantityCoffee} />
       </button>
     </CoffeeQuantityContainer>
   );
