@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { CoffeeContext } from '../../contexts/CoffeeContext';
 
 export function Header() {
-  const { coffeeQuantity } = useContext(CoffeeContext);
+  const { totalQuantityCoffee } = useContext(CoffeeContext);
 
   return (
     <HeaderContainer>
@@ -26,8 +26,8 @@ export function Header() {
         </HeaderLocalization>
         <HeaderLinkCart to="/carrinho">
           <ShoppingCart size={22} weight="fill" />
-          {coffeeQuantity > 0 && (
-            <CoffeeQuantity>{coffeeQuantity}</CoffeeQuantity>
+          {totalQuantityCoffee > 0 && (
+            <CoffeeQuantity>{totalQuantityCoffee}</CoffeeQuantity>
           )}
         </HeaderLinkCart>
       </HeaderContent>

@@ -1,7 +1,7 @@
 import { createContext, useState, type ReactNode } from 'react';
 
 export interface Coffee {
-  id: number;
+  id: string;
   type: string;
   title: string;
   text: string;
@@ -10,13 +10,17 @@ export interface Coffee {
   quantity: number;
 }
 
+interface CatalogProps {
+  coffee: Coffee;
+  quantity: number;
+}
+
 interface CoffeeContextType {
-  coffees: Coffee[];
-  coffeeQuantity: number;
-  coffeeQuantityAdditional?: number;
-  createNewCoffeeOrder: (newCoffeeOrder: Coffee) => void;
-  removeCoffeeOrder: (removeCoffee: number) => void;
-  IncreseCoffeeOrder: (coffeeId: number, coffeeQuantity: number) => void;
+  cart: Coffee[];
+  totalQuantityCoffee: number;
+  createNewCoffeeOrder: ({ coffee, quantity }: CatalogProps) => void;
+  removeCoffeeOrder: (removeCoffee: string) => void;
+  IncreseCoffeeOrder: (itemId: string) => void;
 }
 
 export const CoffeeContext = createContext({} as CoffeeContextType);
@@ -28,45 +32,30 @@ interface CoffeeContextProviderProps {
 export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
-  const [coffees, setCoffees] = useState<Coffee[]>([]);
+  const [cart, setCart] = useState<Coffee[]>([]);
+  const totalQuantityCoffee = cart.length;
 
-  const coffeeQuantity = coffees.length;
-
-  function createNewCoffeeOrder(newCoffeeOrder: Coffee) {
-    setCoffees((prevCoffee) => [
-      ...prevCoffee,
-      { ...newCoffeeOrder, quantity: quantityCoffee },
-    ]);
+  function createNewCoffeeOrder({ coffee, quantity }: CatalogProps) {
+    setCart((prevCoffee) => [...prevCoffee, { ...coffee, quantity }]);
   }
 
-  function IncreseCoffeeOrder(idCoffee: number) {
-    setCoffees((coffees) =>
-      coffees.map((coffee) => {
-        if (coffee.id === idCoffee) {
-          return { ...coffee, quantity: coffee.quantity + 1 };
-        } else {
-          return coffee;
-        }
-      }),
-    );
-  }
+  function IncreseCoffeeOrder(itemId: string) {}
 
-  function removeCoffeeOrder(removeCoffee: number) {
-    const removeCoffeeCart = coffees.filter((coffee) => {
-      return coffee.id !== removeCoffee;
+  function removeCoffeeOrder(itemId: string) {
+    const removeCoffeeCart = cart.filter((coffee) => {
+      return coffee.id !== itemId;
     });
-
-    setCoffees(removeCoffeeCart);
+    setCart(removeCoffeeCart);
   }
 
   return (
     <CoffeeContext.Provider
       value={{
-        coffees,
+        cart,
         createNewCoffeeOrder,
         removeCoffeeOrder,
         IncreseCoffeeOrder,
-        coffeeQuantity,
+        totalQuantityCoffee,
       }}
     >
       {children}
