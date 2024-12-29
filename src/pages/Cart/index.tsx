@@ -17,9 +17,17 @@ import {
   ItemContent,
   ItemDetails,
   RemoveItemButton,
+  InputZipCode,
+  InputContainer,
+  InputStreet,
+  InputComplementContainer,
+  InputNumber,
+  InputComplement,
+  InputNeighborhood,
+  InputCity,
+  InputUF,
 } from './styles';
 
-import { InputText } from './components/InputText';
 import { SelectPayment } from './components/SelectPaymeny';
 import { useContext } from 'react';
 import { CoffeeContext } from '../../contexts/CoffeeContext';
@@ -27,8 +35,12 @@ import { CoffeQuantity } from '../../components/CoffeeQuantity';
 import { coffees } from '../../../data.json';
 
 export function Cart() {
-  const { cart, IncreseCoffeeOrder, removeCoffeeOrder } =
-    useContext(CoffeeContext);
+  const {
+    cart,
+    increaseQuantityItemInCart,
+    decreaseQuantityItemInCart,
+    removeCoffeeOrder,
+  } = useContext(CoffeeContext);
 
   const cartInCoffee = cart.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.id);
@@ -43,15 +55,15 @@ export function Cart() {
     };
   });
 
-  function handleIncreaseCoffeeQuantity(itemId: string) {
-    IncreseCoffeeOrder(itemId);
+  function handleIncreaseCoffeeQuantity(itemId: number) {
+    increaseQuantityItemInCart(itemId);
   }
 
-  function handleDecreaseCoffeeQuantity(itemId: string) {
-    IncreseCoffeeOrder(itemId);
+  function handleDecreaseCoffeeQuantity(itemId: number) {
+    decreaseQuantityItemInCart(itemId);
   }
 
-  function handleRemoveCoffeeCart(itemId: string) {
+  function handleRemoveCoffeeCart(itemId: number) {
     removeCoffeeOrder(itemId);
   }
 
@@ -68,7 +80,19 @@ export function Cart() {
             </AddressDetails>
           </div>
           <form action="">
-            <InputText />
+            <InputContainer>
+              <InputZipCode type="text" placeholder="CEP" />
+              <InputStreet type="text" placeholder="Rua" />
+              <InputComplementContainer>
+                <InputNumber type="text" placeholder="Número" />
+                <InputComplement type="text" placeholder="Complemento" />
+              </InputComplementContainer>
+              <div>
+                <InputNeighborhood type="text" placeholder="Bairro" />
+                <InputCity type="text" placeholder="Cidade" />
+                <InputUF type="text" placeholder="UF" />
+              </div>
+            </InputContainer>
           </form>
         </FormContainer>
         <PayMethodContainer>

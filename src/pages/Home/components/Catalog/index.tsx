@@ -11,7 +11,7 @@ import { useContext, useState } from 'react';
 import { CoffeeContext } from '../../../../contexts/CoffeeContext';
 
 interface Coffee {
-  id: string;
+  id: number;
   type: string;
   title: string;
   text: string;
@@ -33,11 +33,15 @@ export function Catalog({ coffee }: CoffeeProps) {
   }
 
   function incrementQuantity() {
-    setQuantity((state) => state + 1);
+    if (quantity < 20) {
+      setQuantity((state) => state + 1);
+    }
   }
 
   function decreaseQuantity() {
-    setQuantity((state) => state - 1);
+    if (quantity > 0) {
+      setQuantity((state) => state - 1);
+    }
   }
 
   return (
