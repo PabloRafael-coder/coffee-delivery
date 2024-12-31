@@ -55,6 +55,14 @@ export function Cart() {
     };
   });
 
+  const totalValueInCart = cart.reduce((acumulador, valorAtual) => {
+    return acumulador + valorAtual.quantity * valorAtual.price;
+  }, 0);
+
+  const delivery = 3.5;
+
+  const orderTotal = delivery + totalValueInCart;
+
   function handleIncreaseCoffeeQuantity(itemId: number) {
     increaseQuantityItemInCart(itemId);
   }
@@ -147,15 +155,15 @@ export function Cart() {
           <OrderSummary>
             <div>
               <p>Total de Itens</p>
-              <p>R$ 29,70</p>
+              <p>R${totalValueInCart.toFixed(2)}</p>
             </div>
             <div>
               <p>Entrega</p>
-              <p>R$ 3,50</p>
+              <p>R${delivery}</p>
             </div>
             <div>
               <p>Total</p>
-              <p>RS 33,20</p>
+              <p>R${orderTotal.toFixed(2)}</p>
             </div>
           </OrderSummary>
           <ButtonOrderConfirm>

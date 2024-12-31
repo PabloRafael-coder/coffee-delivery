@@ -5,7 +5,7 @@ export interface Coffee {
   type: string;
   title: string;
   text: string;
-  price: string;
+  price: number;
   image: string;
   quantity: number;
 }
@@ -37,8 +37,6 @@ export function CoffeeContextProvider({
   const totalQuantityCoffee = cart.length;
 
   function createNewCoffeeOrder({ coffee, quantity }: CatalogProps) {
-    // setCart((prevCoffee) => [...prevCoffee, { ...coffee, quantity }]);
-
     setCart((state) => {
       const isCoffeeInCart = state.find((item) => item.id === coffee.id);
 

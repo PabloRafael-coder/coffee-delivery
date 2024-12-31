@@ -15,7 +15,7 @@ interface Coffee {
   type: string;
   title: string;
   text: string;
-  price: string;
+  price: number;
   image: string;
   quantity: number;
 }
