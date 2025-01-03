@@ -39,7 +39,7 @@ export function Cart() {
     cart,
     increaseQuantityItemInCart,
     decreaseQuantityItemInCart,
-    removeCoffeeOrder,
+    removeCoffeeCart,
   } = useContext(CoffeeContext);
 
   const cartInCoffee = cart.map((item) => {
@@ -72,7 +72,7 @@ export function Cart() {
   }
 
   function handleRemoveCoffeeCart(itemId: number) {
-    removeCoffeeOrder(itemId);
+    removeCoffeeCart(itemId);
   }
 
   return (

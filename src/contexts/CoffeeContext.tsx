@@ -19,7 +19,7 @@ interface CoffeeContextType {
   cart: Coffee[];
   totalQuantityCoffee: number;
   createNewCoffeeOrder: ({ coffee, quantity }: CatalogProps) => void;
-  removeCoffeeOrder: (removeCoffee: number) => void;
+  removeCoffeeCart: (itemId: number) => void;
   increaseQuantityItemInCart: (itemId: number) => void;
   decreaseQuantityItemInCart: (itemId: number) => void;
 }
@@ -34,32 +34,56 @@ export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
   const [cart, dispatch] = useReducer((state: Coffee[], action: any) => {
-    console.log(state);
-    console.log(action);
+    switch (action.type) {
+      case 'ADD_NEW_COFFEE_CART': {
+        const isCoffeeInCart = state.find(
+          (item) => item.id === action.payload.id,
+        );
 
-    if (action.type === 'ADD_NEW_COFFEE_CART') {
-      return [...state, { ...action.payload }];
+        if (isCoffeeInCart) {
+          return state.map((item) =>
+            item.id === action.payload.id
+              ? { ...item, quantity: action.payload.quantity + item.quantity }
+              : item,
+          );
+        } else {
+          return [...state, { ...action.payload }];
+        }
+      }
+
+      case 'INCREASE_QUANTITY_ITEM_IN_CART':
+        return state.map((item) => {
+          if (item.id === action.payload.itemId) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return { ...item };
+          }
+        });
+      case 'DECREASE_QUANTITY_ITEM_IN_CART':
+        return state.map((item) => {
+          if (item.id === action.payload.itemId) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return { ...item };
+          }
+        });
+
+      case 'REMOVE_COFFEE_CART': {
+        const removeCoffeeCart = state.filter((coffee) => {
+          return coffee.id !== action.payload.itemId;
+        });
+
+        return removeCoffeeCart;
+      }
+
+      default:
+        return state;
     }
-
-    return state;
   }, []);
 
   const totalQuantityCoffee = cart.length;
 
   function createNewCoffeeOrder({ coffee, quantity }: CatalogProps) {
-    // setCart((state) => {
-    //   const isCoffeeInCart = state.find((item) => item.id === coffee.id);
-    //   if (isCoffeeInCart) {
-    //     return state.map((item) =>
-    //       item.id === coffee.id
-    //         ? { ...item, quantity: item.quantity + quantity }
-    //         : item,
-    //     );
-    //   } else {
-    //     return [...state, { ...coffee, quantity }];
-    //   }
-    // });
-
     dispatch({
       type: 'ADD_NEW_COFFEE_CART',
       payload: {
@@ -70,14 +94,6 @@ export function CoffeeContextProvider({
   }
 
   function increaseQuantityItemInCart(itemId: number) {
-    // setCart((state) =>
-    //   state.map((coffee) => {
-    //     if (coffee.quantity < 20 && coffee.id === itemId) {
-    //       return { ...coffee, quantity: coffee.quantity + 1 };
-    //     }
-    //     return { ...coffee };
-    //   }),
-    // );
     dispatch({
       type: 'INCREASE_QUANTITY_ITEM_IN_CART',
       payload: {
@@ -87,21 +103,21 @@ export function CoffeeContextProvider({
   }
 
   function decreaseQuantityItemInCart(itemId: number) {
-    // setCart((state) =>
-    //   state.map((coffee) => {
-    //     if (coffee.quantity > 1 && coffee.id === itemId) {
-    //       return { ...coffee, quantity: coffee.quantity - 1 };
-    //     }
-    //     return { ...coffee };
-    //   }),
-    // );
+    dispatch({
+      type: 'DECREASE_QUANTITY_ITEM_IN_CART',
+      payload: {
+        itemId,
+      },
+    });
   }
 
-  function removeCoffeeOrder(itemId: number) {
-    // const removeCoffeeCart = cart.filter((coffee) => {
-    //   return coffee.id !== itemId;
-    // });
-    // setCart(removeCoffeeCart);
+  function removeCoffeeCart(itemId: number) {
+    dispatch({
+      type: 'REMOVE_COFFEE_CART',
+      payload: {
+        itemId,
+      },
+    });
   }
 
   return (
@@ -110,7 +126,7 @@ export function CoffeeContextProvider({
         cart,
         createNewCoffeeOrder,
         decreaseQuantityItemInCart,
-        removeCoffeeOrder,
+        removeCoffeeCart,
         increaseQuantityItemInCart,
         totalQuantityCoffee,
       }}
