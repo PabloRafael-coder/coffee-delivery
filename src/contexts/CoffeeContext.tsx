@@ -1,6 +1,13 @@
 import { createContext, useReducer, type ReactNode } from 'react';
+import { cartReducer } from '../reducers/cart/reducer';
+import {
+  addNewOrderInCartAction,
+  decreaseQuantityItemInCartAction,
+  increaseQuantityItemInCartAction,
+  removeCoffeeCartAction,
+} from '../reducers/cart/actions';
 
-export interface Coffee {
+export interface CoffeeInCart {
   id: number;
   type: string;
   title: string;
@@ -10,15 +17,15 @@ export interface Coffee {
   quantity: number;
 }
 
-interface CatalogProps {
-  coffee: Coffee;
+export interface ObjectCartCoffee {
+  coffee: CoffeeInCart;
   quantity: number;
 }
 
 interface CoffeeContextType {
-  cart: Coffee[];
+  cart: CoffeeInCart[];
   totalQuantityCoffee: number;
-  createNewCoffeeOrder: ({ coffee, quantity }: CatalogProps) => void;
+  createNewCoffeeOrder: ({ coffee, quantity }: ObjectCartCoffee) => void;
   removeCoffeeCart: (itemId: number) => void;
   increaseQuantityItemInCart: (itemId: number) => void;
   decreaseQuantityItemInCart: (itemId: number) => void;
@@ -33,91 +40,24 @@ interface CoffeeContextProviderProps {
 export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
-  const [cart, dispatch] = useReducer((state: Coffee[], action: any) => {
-    switch (action.type) {
-      case 'ADD_NEW_COFFEE_CART': {
-        const isCoffeeInCart = state.find(
-          (item) => item.id === action.payload.id,
-        );
-
-        if (isCoffeeInCart) {
-          return state.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: action.payload.quantity + item.quantity }
-              : item,
-          );
-        } else {
-          return [...state, { ...action.payload }];
-        }
-      }
-
-      case 'INCREASE_QUANTITY_ITEM_IN_CART':
-        return state.map((item) => {
-          if (item.id === action.payload.itemId) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return { ...item };
-          }
-        });
-      case 'DECREASE_QUANTITY_ITEM_IN_CART':
-        return state.map((item) => {
-          if (item.id === action.payload.itemId) {
-            return { ...item, quantity: item.quantity - 1 };
-          } else {
-            return { ...item };
-          }
-        });
-
-      case 'REMOVE_COFFEE_CART': {
-        const removeCoffeeCart = state.filter((coffee) => {
-          return coffee.id !== action.payload.itemId;
-        });
-
-        return removeCoffeeCart;
-      }
-
-      default:
-        return state;
-    }
-  }, []);
+  const [cart, dispatch] = useReducer(cartReducer, []);
 
   const totalQuantityCoffee = cart.length;
 
-  function createNewCoffeeOrder({ coffee, quantity }: CatalogProps) {
-    dispatch({
-      type: 'ADD_NEW_COFFEE_CART',
-      payload: {
-        ...coffee,
-        quantity,
-      },
-    });
+  function createNewCoffeeOrder({ coffee, quantity }: ObjectCartCoffee) {
+    dispatch(addNewOrderInCartAction({ coffee, quantity }));
   }
 
   function increaseQuantityItemInCart(itemId: number) {
-    dispatch({
-      type: 'INCREASE_QUANTITY_ITEM_IN_CART',
-      payload: {
-        itemId,
-      },
-    });
+    dispatch(increaseQuantityItemInCartAction(itemId));
   }
 
   function decreaseQuantityItemInCart(itemId: number) {
-    dispatch({
-      type: 'DECREASE_QUANTITY_ITEM_IN_CART',
-      payload: {
-        itemId,
-      },
-    });
+    dispatch(decreaseQuantityItemInCartAction(itemId));
   }
 
   function removeCoffeeCart(itemId: number) {
-    dispatch({
-      type: 'REMOVE_COFFEE_CART',
-      payload: {
-        itemId,
-      },
-    });
+    dispatch(removeCoffeeCartAction(itemId));
   }
 
   return (

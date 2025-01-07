@@ -81,6 +81,12 @@ export const PayMethodContainer = styled(StyleBaseSection)`
   }
 `;
 
+export const PaymentOptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const PayDetails = styled(StylesBaseDetails)``;
 
 export const AsideContainer = styled.aside`

@@ -1,4 +1,12 @@
-import { CurrencyDollar, MapPinLine, Trash } from '@phosphor-icons/react';
+import { useForm } from 'react-hook-form';
+import {
+  CurrencyDollar,
+  MapPinLine,
+  Trash,
+  Bank,
+  CreditCard,
+  Money,
+} from '@phosphor-icons/react';
 import {
   AddressDetails,
   AsideContainer,
@@ -26,15 +34,21 @@ import {
   InputNeighborhood,
   InputCity,
   InputUF,
+  PaymentOptions,
 } from './styles';
 
-import { SelectPayment } from './components/SelectPaymeny';
+import { Radio } from './components/Radio';
 import { useContext } from 'react';
 import { CoffeeContext } from '../../contexts/CoffeeContext';
 import { CoffeQuantity } from '../../components/CoffeeQuantity';
 import { coffees } from '../../../data.json';
 
 export function Cart() {
+  const { register, handleSubmit, watch } = useForm();
+
+  const isPaymentMethod = watch('pagamentMethod');
+
+  console.log(isPaymentMethod);
   const {
     cart,
     increaseQuantityItemInCart,
@@ -75,6 +89,10 @@ export function Cart() {
     removeCoffeeCart(itemId);
   }
 
+  function handleCreateNewOrder(data: any) {
+    console.log(data);
+  }
+
   return (
     <CartContainer>
       <CartContent>
@@ -87,18 +105,42 @@ export function Cart() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </AddressDetails>
           </div>
-          <form action="">
+          <form id="order" onSubmit={handleSubmit(handleCreateNewOrder)}>
             <InputContainer>
-              <InputZipCode type="text" placeholder="CEP" />
-              <InputStreet type="text" placeholder="Rua" />
+              <InputZipCode
+                {...register('zipCode')}
+                type="text"
+                placeholder="CEP"
+              />
+              <InputStreet
+                {...register('street')}
+                type="text"
+                placeholder="Rua"
+              />
               <InputComplementContainer>
-                <InputNumber type="text" placeholder="Número" />
-                <InputComplement type="text" placeholder="Complemento" />
+                <InputNumber
+                  {...register('number')}
+                  type="text"
+                  placeholder="Número"
+                />
+                <InputComplement
+                  {...register('complement')}
+                  type="text"
+                  placeholder="Complemento"
+                />
               </InputComplementContainer>
               <div>
-                <InputNeighborhood type="text" placeholder="Bairro" />
-                <InputCity type="text" placeholder="Cidade" />
-                <InputUF type="text" placeholder="UF" />
+                <InputNeighborhood
+                  {...register('neighborhood')}
+                  type="text"
+                  placeholder="Bairro"
+                />
+                <InputCity
+                  {...register('city')}
+                  type="text"
+                  placeholder="Cidade"
+                />
+                <InputUF {...register('uf')} type="text" placeholder="UF" />
               </div>
             </InputContainer>
           </form>
@@ -113,7 +155,32 @@ export function Cart() {
               </p>
             </PayDetails>
           </PayDetailsContainer>
-          <SelectPayment />
+          <PaymentOptions>
+            <Radio
+              isSelected={isPaymentMethod === 'credit'}
+              {...register('pagamentMethod')}
+              value="credit"
+            >
+              <CreditCard size={16} />
+              <span>Cartão de crédito</span>
+            </Radio>
+            <Radio
+              isSelected={isPaymentMethod === 'debit'}
+              {...register('pagamentMethod')}
+              value="debit"
+            >
+              <Bank size={16} />
+              <span>Cartão de débito</span>
+            </Radio>
+            <Radio
+              isSelected={isPaymentMethod === 'cash'}
+              {...register('pagamentMethod')}
+              value="cash"
+            >
+              <Money size={16} />
+              <span>Dinheiro</span>
+            </Radio>
+          </PaymentOptions>
         </PayMethodContainer>
       </CartContent>
       <AsideContainer>
@@ -147,7 +214,7 @@ export function Cart() {
                     </CoffeeDetails>
                   </ItemDetails>
                 </ItemContent>
-                <p>R${coffee.price}</p>
+                <p>R${coffee.price.toFixed(2)}</p>
               </ItemContainer>
             );
           })}
@@ -159,14 +226,14 @@ export function Cart() {
             </div>
             <div>
               <p>Entrega</p>
-              <p>R${delivery}</p>
+              <p>R${delivery.toFixed(2)}</p>
             </div>
             <div>
               <p>Total</p>
               <p>R${orderTotal.toFixed(2)}</p>
             </div>
           </OrderSummary>
-          <ButtonOrderConfirm>
+          <ButtonOrderConfirm type="submit" form="order">
             <a href="/pedidos">Confirmar pedido</a>
           </ButtonOrderConfirm>
         </section>

@@ -10,21 +10,20 @@ import { CoffeQuantity } from '../../../../components/CoffeeQuantity';
 import { useContext, useState } from 'react';
 import { CoffeeContext } from '../../../../contexts/CoffeeContext';
 
-interface Coffee {
+export interface Coffee {
   id: number;
   type: string;
   title: string;
   text: string;
   price: number;
   image: string;
-  quantity: number;
 }
 
-interface CoffeeProps {
+interface CatalogProps {
   coffee: Coffee;
 }
 
-export function Catalog({ coffee }: CoffeeProps) {
+export function Catalog({ coffee }: CatalogProps) {
   const { createNewCoffeeOrder } = useContext(CoffeeContext);
   const [quantity, setQuantity] = useState<number>(1);
 

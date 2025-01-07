@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
-export const PaymentButtonContainer = styled.div`
+export const PaymentButtonContainer = styled.label`
   display: flex;
   gap: 0.75rem;
 
-  button {
+  &[data-state='true'] {
+    background-color: ${(props) => props.theme['--purple-light']};
+    border: 2px solid ${(props) => props.theme['--purple']};
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -29,8 +38,6 @@ export const PaymentButtonContainer = styled.div`
     }
 
     &:focus {
-      background-color: ${(props) => props.theme['--purple-light']};
-      border: 2px solid ${(props) => props.theme['--purple']};
     }
   }
 `;
