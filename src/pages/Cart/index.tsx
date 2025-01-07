@@ -1,4 +1,6 @@
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as zod from 'zod';
 import {
   CurrencyDollar,
   MapPinLine,
@@ -43,12 +45,35 @@ import { CoffeeContext } from '../../contexts/CoffeeContext';
 import { CoffeQuantity } from '../../components/CoffeeQuantity';
 import { coffees } from '../../../data.json';
 
+interface FormInputs {
+  city: string;
+  complement: string;
+  neighborhood: string;
+  number: number;
+  street: string;
+  uf: string;
+  zipCode: string;
+  pagamentMethod: 'credit' | 'debit' | 'cash';
+}
+
+const newOrderFormValidationSchema = zod.object({
+  city: zod.string().min(1, 'informe o nome da sua cidade'),
+  complement: zod.string().min(1),
+  neighborhood: zod.string().min(1),
+  number: zod.number().min(1),
+  street: zod.string().min(1),
+  uf: zod.string().min(1).max(2),
+  zipCode: zod.string().min(8).max(9),
+  pagamentMethod: zod.string(),
+});
+
 export function Cart() {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch } = useForm<FormInputs>({
+    resolver: zodResolver(newOrderFormValidationSchema),
+  });
 
   const isPaymentMethod = watch('pagamentMethod');
 
-  console.log(isPaymentMethod);
   const {
     cart,
     increaseQuantityItemInCart,
@@ -89,9 +114,9 @@ export function Cart() {
     removeCoffeeCart(itemId);
   }
 
-  function handleCreateNewOrder(data: any) {
+  const handleOrderCheckout: SubmitHandler<FormInputs> = (data) => {
     console.log(data);
-  }
+  };
 
   return (
     <CartContainer>
@@ -105,7 +130,7 @@ export function Cart() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </AddressDetails>
           </div>
-          <form id="order" onSubmit={handleSubmit(handleCreateNewOrder)}>
+          <form id="order" onSubmit={handleSubmit(handleOrderCheckout)}>
             <InputContainer>
               <InputZipCode
                 {...register('zipCode')}
@@ -119,7 +144,7 @@ export function Cart() {
               />
               <InputComplementContainer>
                 <InputNumber
-                  {...register('number')}
+                  {...register('number', { valueAsNumber: true })}
                   type="text"
                   placeholder="Número"
                 />
@@ -147,7 +172,7 @@ export function Cart() {
         </FormContainer>
         <PayMethodContainer>
           <PayDetailsContainer>
-            <CurrencyDollar />
+            <CurrencyDollar size={22} />
             <PayDetails>
               <p>Pagamento</p>
               <p>

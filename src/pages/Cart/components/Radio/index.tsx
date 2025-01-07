@@ -1,12 +1,13 @@
-import { forwardRef, type InputHTMLAttributes, type LegacyRef } from 'react';
+import { forwardRef, type InputHTMLAttributes } from 'react';
 import { PaymentButtonContainer } from './styles';
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isSelected: boolean;
-};
-export const Radio = forwardRef(function Radio(
-  { children, isSelected, ...rest }: Props,
-  ref: LegacyRef<HTMLInputElement>,
+}
+
+export const Radio = forwardRef<HTMLInputElement, Props>(function Radio(
+  { children, isSelected, ...rest },
+  ref,
 ) {
   return (
     <PaymentButtonContainer data-state={isSelected}>

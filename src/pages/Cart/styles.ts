@@ -76,15 +76,12 @@ export const PayDetailsContainer = styled.div`
 export const PayMethodContainer = styled(StyleBaseSection)`
   & svg {
     color: ${(props) => props.theme['--purple']};
-    width: 22px;
-    height: 22px;
   }
 `;
 
 export const PaymentOptions = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 0.75rem;
 `;
 
 export const PayDetails = styled(StylesBaseDetails)``;
