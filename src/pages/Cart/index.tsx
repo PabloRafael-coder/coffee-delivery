@@ -27,49 +27,48 @@ import {
   ItemContent,
   ItemDetails,
   RemoveItemButton,
-  InputZipCode,
-  InputContainer,
-  InputStreet,
-  InputComplementContainer,
-  InputNumber,
-  InputComplement,
-  InputNeighborhood,
-  InputCity,
-  InputUF,
   PaymentOptions,
+  AddressForm,
 } from './styles';
 
-import { Radio } from './components/Radio';
+import { Radio } from './components/Form/Radio';
 import { useContext } from 'react';
 import { CoffeeContext } from '../../contexts/CoffeeContext';
 import { CoffeQuantity } from '../../components/CoffeeQuantity';
 import { coffees } from '../../../data.json';
-
-interface FormInputs {
-  city: string;
-  complement: string;
-  neighborhood: string;
-  number: number;
-  street: string;
-  uf: string;
-  zipCode: string;
-  pagamentMethod: 'credit' | 'debit' | 'cash';
-}
+import { TextInput } from './components/Form/TextInput';
+import { Item } from '../../reducers/cart/reducer';
 
 const newOrderFormValidationSchema = zod.object({
-  city: zod.string().min(1, 'informe o nome da sua cidade'),
-  complement: zod.string().min(1),
-  neighborhood: zod.string().min(1),
-  number: zod.number().min(1),
-  street: zod.string().min(1),
-  uf: zod.string().min(1).max(2),
-  zipCode: zod.string().min(8).max(9),
-  pagamentMethod: zod.string(),
+  city: zod.string().min(1, 'informe a cidade'),
+  complement: zod.string().min(1, 'informe o complemento'),
+  neighborhood: zod.string().min(1, 'informe o bairro'),
+  number: zod.number().min(1, 'informe o número da casa'),
+  street: zod.string().min(1, 'informe a rua'),
+  uf: zod.string().min(1, 'informe a UF').max(2),
+  zipCode: zod.string().min(8, 'Informe o CEP').max(9),
+  pagamentMethod: zod.enum(['credit', 'debit', 'cash']),
 });
 
+export type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>;
+
 export function Cart() {
-  const { register, handleSubmit, watch } = useForm<FormInputs>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
+    defaultValues: {
+      city: '',
+      complement: '',
+      neighborhood: '',
+      street: '',
+      uf: '',
+      zipCode: '',
+      pagamentMethod: 'cash',
+    },
   });
 
   const isPaymentMethod = watch('pagamentMethod');
@@ -79,6 +78,7 @@ export function Cart() {
     increaseQuantityItemInCart,
     decreaseQuantityItemInCart,
     removeCoffeeCart,
+    newOrderData,
   } = useContext(CoffeeContext);
 
   const cartInCoffee = cart.map((item) => {
@@ -94,7 +94,7 @@ export function Cart() {
     };
   });
 
-  const totalValueInCart = cart.reduce((acumulador, valorAtual) => {
+  const totalValueInCart = cartInCoffee.reduce((acumulador, valorAtual) => {
     return acumulador + valorAtual.quantity * valorAtual.price;
   }, 0);
 
@@ -102,20 +102,20 @@ export function Cart() {
 
   const orderTotal = delivery + totalValueInCart;
 
-  function handleIncreaseCoffeeQuantity(itemId: number) {
+  function handleIncreaseCoffeeQuantity(itemId: Item['id']) {
     increaseQuantityItemInCart(itemId);
   }
 
-  function handleDecreaseCoffeeQuantity(itemId: number) {
+  function handleDecreaseCoffeeQuantity(itemId: Item['id']) {
     decreaseQuantityItemInCart(itemId);
   }
 
-  function handleRemoveCoffeeCart(itemId: number) {
+  function handleRemoveCoffeeCart(itemId: Item['id']) {
     removeCoffeeCart(itemId);
   }
 
-  const handleOrderCheckout: SubmitHandler<FormInputs> = (data) => {
-    console.log(data);
+  const handleOrderCheckout: SubmitHandler<NewOrderFormData> = (data) => {
+    newOrderData(data);
   };
 
   return (
@@ -131,43 +131,50 @@ export function Cart() {
             </AddressDetails>
           </div>
           <form id="order" onSubmit={handleSubmit(handleOrderCheckout)}>
-            <InputContainer>
-              <InputZipCode
-                {...register('zipCode')}
-                type="text"
+            <AddressForm>
+              <TextInput
                 placeholder="CEP"
+                error={errors.zipCode}
+                {...register('zipCode')}
+                containerPropsStyle={{ style: { gridArea: 'zipCode' } }}
               />
-              <InputStreet
-                {...register('street')}
-                type="text"
+              <TextInput
                 placeholder="Rua"
+                error={errors.street}
+                {...register('street')}
+                containerPropsStyle={{ style: { gridArea: 'street' } }}
               />
-              <InputComplementContainer>
-                <InputNumber
-                  {...register('number', { valueAsNumber: true })}
-                  type="text"
-                  placeholder="Número"
-                />
-                <InputComplement
-                  {...register('complement')}
-                  type="text"
-                  placeholder="Complemento"
-                />
-              </InputComplementContainer>
-              <div>
-                <InputNeighborhood
-                  {...register('neighborhood')}
-                  type="text"
-                  placeholder="Bairro"
-                />
-                <InputCity
-                  {...register('city')}
-                  type="text"
-                  placeholder="Cidade"
-                />
-                <InputUF {...register('uf')} type="text" placeholder="UF" />
-              </div>
-            </InputContainer>
+              <TextInput
+                placeholder="Complemento"
+                error={errors.complement}
+                {...register('complement')}
+                containerPropsStyle={{ style: { gridArea: 'complement' } }}
+              />
+              <TextInput
+                placeholder="Cidade"
+                error={errors.city}
+                {...register('city')}
+                containerPropsStyle={{ style: { gridArea: 'city' } }}
+              />
+              <TextInput
+                placeholder="Bairro"
+                error={errors.neighborhood}
+                {...register('neighborhood')}
+                containerPropsStyle={{ style: { gridArea: 'neighborhood' } }}
+              />
+              <TextInput
+                placeholder="Número"
+                error={errors.number}
+                {...register('number', { valueAsNumber: true })}
+                containerPropsStyle={{ style: { gridArea: 'number' } }}
+              />
+              <TextInput
+                placeholder="UF"
+                error={errors.uf}
+                {...register('uf')}
+                containerPropsStyle={{ style: { gridArea: 'uf' } }}
+              />
+            </AddressForm>
           </form>
         </FormContainer>
         <PayMethodContainer>

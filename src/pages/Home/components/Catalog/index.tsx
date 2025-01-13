@@ -10,25 +10,23 @@ import { CoffeQuantity } from '../../../../components/CoffeeQuantity';
 import { useContext, useState } from 'react';
 import { CoffeeContext } from '../../../../contexts/CoffeeContext';
 
-export interface Coffee {
-  id: number;
-  type: string;
-  title: string;
-  text: string;
-  price: number;
-  image: string;
+interface Coffee {
+  coffee: {
+    id: number;
+    type: string;
+    title: string;
+    text: string;
+    price: number;
+    image: string;
+  };
 }
 
-interface CatalogProps {
-  coffee: Coffee;
-}
-
-export function Catalog({ coffee }: CatalogProps) {
+export function Catalog({ coffee }: Coffee) {
   const { createNewCoffeeOrder } = useContext(CoffeeContext);
   const [quantity, setQuantity] = useState<number>(1);
 
   function handleCreateNewCoffee() {
-    createNewCoffeeOrder({ coffee, quantity });
+    createNewCoffeeOrder({ id: coffee.id, quantity });
   }
 
   function incrementQuantity() {
