@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const HomeSection = styled.section`
   width: min(90rem, 100% - 2 * 10rem);
+  max-width: 1120px;
   display: flex;
   gap: 4rem;
   margin-inline: auto;
-  border: solid 1px black;
   padding-block: 5.75rem;
 `;
 
@@ -45,9 +45,9 @@ export const CoffeeMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: min(90rem, 100% - 2 * 10rem);
+  max-width: 1120px;
   gap: 4rem;
   margin-inline: auto;
-  border: solid 1px black;
   padding-block: 1.5rem;
 
   h2 {

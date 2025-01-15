@@ -106,7 +106,6 @@ export const AsideContainer = styled.aside`
   section {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     background: ${(props) => props.theme['--base-card']};
     padding: 2.5rem;
     border-radius: 0.375rem 2.75rem;
@@ -115,6 +114,7 @@ export const AsideContainer = styled.aside`
 
 export const Separator = styled.div`
   border: solid 1px ${(props) => props.theme['--base-button']};
+  margin: 1.5rem 0;
 `;
 
 export const OrderSummary = styled.div`
@@ -153,10 +153,10 @@ export const ButtonOrderConfirm = styled.button`
 
 export const ItemContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  width: 368px;
 
-  > p {
+  p {
     font-size: var(--fs-text-m);
     font-weight: bold;
     color: ${(props) => props.theme['--base-text']};

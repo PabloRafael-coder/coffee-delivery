@@ -245,12 +245,12 @@ export function Cart() {
                       </AddOrRemoveItemsCart>
                     </CoffeeDetails>
                   </ItemDetails>
+                  <p>R${coffee.price.toFixed(2)}</p>
                 </ItemContent>
-                <p>R${coffee.price.toFixed(2)}</p>
+                <Separator></Separator>
               </ItemContainer>
             );
           })}
-          <Separator></Separator>
           <OrderSummary>
             <div>
               <p>Total de Itens</p>
