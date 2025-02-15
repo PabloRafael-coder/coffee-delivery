@@ -86,6 +86,6 @@ Este projeto esta sob a licença [MIT](./LICENSE).
 Feito com ❤️ por PabloRafael-coder 👋🏽 [Entre em contato!](https://www.linkedin.com/in/pablo-rafael-1372a2279/)
 
 ## Autor
- <img src="https://avatars.githubusercontent.com/u/135430154?v=4" width="150px" height="150px" alt=""/>
+ <img src="https://avatars.githubusercontent.com/u/135430154?v=4" width="150px" height="150px"/>
 Feito com ❤️ por PabloRafael-coder 👋🏽
 
