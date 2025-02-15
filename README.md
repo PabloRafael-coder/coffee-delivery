@@ -12,7 +12,7 @@
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#-como-executar-o-projeto">Como executar o projeto</a> •
- <a href="#-como-executar-o-projeto">Como contribuir com o projeto</a> • 	
+ <a href="#-como-contribuir-com-o-projeto">Como contribuir com o projeto</a> • 	
  <a href="#tecnologias">Tecnologias</a> • 	
  <a href="#autor">Autor</a> • 
  <a href="#-licença">Licença</a> 
@@ -78,13 +78,14 @@ $ npm run dev ou yarn dev
 4. Envie as suas alterações: `git push origin my-feature`
 > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](./CONTRIBUTING.md)
 
-### Autor
- <img src="https://avatars.githubusercontent.com/u/135430154?v=4" width="100px;" alt=""/>
-Feito com ❤️ por PabloRafael-coder 👋🏽
-
 
 ## 📝 Licença
 
 Este projeto esta sob a licença [MIT](./LICENSE).
 
 Feito com ❤️ por PabloRafael-coder 👋🏽 [Entre em contato!](https://www.linkedin.com/in/pablo-rafael-1372a2279/)
+
+## Autor
+ <img src="https://avatars.githubusercontent.com/u/135430154?v=4" width="150px" height="150px" alt=""/>
+Feito com ❤️ por PabloRafael-coder 👋🏽
+
