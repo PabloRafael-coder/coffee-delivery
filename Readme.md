@@ -1,8 +1,3 @@
-<div align="center">
-	<img src="https://img.shields.io/badge/Version-v0.0.0-blue?style=flat-square"/>
-	<img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"/>
-</div>
-
 <div align=center>
   <img src=https://coffee-delivery-one-theta.vercel.app/assets/Logo-B2hX37pg.svg/ width=175px height=150px>
 </div>
